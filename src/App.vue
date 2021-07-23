@@ -1,32 +1,77 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <a-layout class="layout">
+    <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
+      <div class="logo">{{collapsed?'RSMS':'零售门店管理系统'}}</div>
+      <a-menu theme="dark" mode="inline" :default-selected-keys="['1']">
+        <a-menu-item key="1">
+          <a-icon type="user" />
+          <span>nav 1</span>
+        </a-menu-item>
+        <a-menu-item key="2">
+          <a-icon type="video-camera" />
+          <span>nav 2</span>
+        </a-menu-item>
+        <a-menu-item key="3">
+          <a-icon type="upload" />
+          <span>nav 3</span>
+        </a-menu-item>
+      </a-menu>
+    </a-layout-sider>
+    <a-layout>
+      <a-layout-header style="background: #fff; padding: 0">
+        <a-icon
+            class="trigger"
+            :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+            @click="() => (collapsed = !collapsed)"
+        />
+      </a-layout-header>
+      <a-layout-content
+          :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
+      >
+        Content
+      </a-layout-content>
+    </a-layout>
+  </a-layout>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      collapsed: false,
+    };
+  },
+  methods:{
+
+  }
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.layout{
+  height: 100vh;
+}
+
+.layout .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.layout .trigger:hover {
+  color: #1890ff;
+}
+
+.layout .logo {
+  height: 32px;
+  line-height: 32px;
+  color: #fff;
   text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
+  letter-spacing: 2px;
   font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
 }
 </style>
